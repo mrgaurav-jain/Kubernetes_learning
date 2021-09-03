@@ -3,3 +3,4 @@ mount '/mnt/logsdrive' do
   device   '/dev/nvme101'
   action   [:mount, :enable]
 end
+=================================
