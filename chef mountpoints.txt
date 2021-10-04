@@ -1,6 +1,0 @@
-mount '/mnt/logsdrive' do
-   fstype   'ext4'
-  device   '/dev/nvme101'
-  action   [:mount, :enable]
-end
-=================================
