@@ -58,7 +58,7 @@ spec:
 
 
 ****************************************************************************************************************
-EXAMPLE OF REPLICA SET
+EXAMPLE OF REPLICA SETs
 
 
 kind: ReplicaSet                                    

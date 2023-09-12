@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-ingress-rs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-ingress
+  template:
+    metadata:
+      labels:
+        app: nginx-ingress
+    spec:
+      containers:
+        - name: nginx-ingress-controller
+          image: nginx/nginx-ingress:latest
+          args:
+            - /nginx-ingress-controller
+            - --configmap=$(nginx-ingress)/nginx-configuration
+            - --tcp-services-configmap=$(nginx-ingress)/tcp-services
+            - --udp-services-configmap=$(nginx-ingress)/udp-services
+            - --publish-service=$(nginx-ingress)/ingress-nginx-controller
+          env:
+            - name: nginx-ingress1
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: nginx-ingress
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          ports:
+            - containerPort: 80
+            - containerPort: 443
